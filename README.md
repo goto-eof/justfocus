@@ -15,13 +15,15 @@ without unnecessary distractions.
   pause functionality, encouraging uninterrupted concentration.
 * **Lightweight & Efficient:** Optimized for size and performance, making it a nimble addition to your workflow.
 
-### Installation (Snap)
+### Linux Installation (Snap)
 
 JustFocus will be available as a Snap package for easy installation on most Linux distributions.
 
 ```bash
 sudo snap install justfocus
 ```
+
+### Linux Installation (dpkg)
 
 For now, it is possible to install Just Focus by downloading the
 `.deb` [package](https://github.com/goto-eof/justfocus/releases/download/1.0.0/just-focus_1.0.0_amd64.deb) and by

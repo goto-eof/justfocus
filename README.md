@@ -15,6 +15,10 @@ without unnecessary distractions.
   pause functionality, encouraging uninterrupted concentration.
 * **Lightweight & Efficient:** Optimized for size and performance, making it a nimble addition to your workflow.
 
+----
+
+# Download
+
 ### Windows installation
 
 Download and install the

@@ -32,11 +32,15 @@ sudo snap install justfocus
 Contributions are welcome! If you have suggestions for features, bug reports, or would like to contribute code, please
 feel free to open an issue or pull request on the GitHub repository.
 
-## Build and execute the snap
+### Build and execute the snap
 
 ```bash
 sudo snap remove justfocus ; snapcraft clean; snapcraft; sudo snap install justfocus_*.*.*_amd64.snap --dangerous; justfocus
 ```
+
+### Screenshot
+
+[screenshot](images/screenshot.png)
 
 ### License
 

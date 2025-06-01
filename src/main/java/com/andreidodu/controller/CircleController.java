@@ -58,4 +58,15 @@ public class CircleController implements CircleObserver {
 
         return String.format("%02d:%02d", minutes, seconds);
     }
+
+    @Override
+    public void releaseResources() {
+        if (executorService != null && !executorService.isShutdown()) {
+            try {
+                executorService.shutdownNow();
+            } catch (Exception e) {
+                System.err.println("Unable to shutdown executor service: " + e.getMessage());
+            }
+        }
+    }
 }

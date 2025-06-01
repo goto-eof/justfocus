@@ -4,9 +4,7 @@ import com.andreidodu.observer.CircleObserver;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
 
 public class WindowGUI extends JFrame {
@@ -75,6 +73,16 @@ public class WindowGUI extends JFrame {
                     int Y = thisY + yMoved;
                     setLocation(X, Y);
                 }
+            }
+        });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("releasing resources");
+                circleObserver.releaseResources();
+                dispose();
+                System.exit(0);
             }
         });
     }

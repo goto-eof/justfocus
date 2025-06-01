@@ -17,10 +17,18 @@ without unnecessary distractions.
 
 ### Installation (Snap)
 
-JustFocus is available as a Snap package for easy installation on most Linux distributions.
+JustFocus will be available as a Snap package for easy installation on most Linux distributions.
 
 ```bash
 sudo snap install justfocus
+```
+
+For now, it is possible to install Just Focus by downloading the
+`.deb` [package](https://github.com/goto-eof/justfocus/releases/download/1.0.0/just-focus_1.0.0_amd64.deb) and by
+installing it:
+
+```bash
+sudo dpkg -i just-focus_*.*.*_amd64.deb
 ```
 
 ### Technologies
@@ -31,12 +39,6 @@ sudo snap install justfocus
 
 Contributions are welcome! If you have suggestions for features, bug reports, or would like to contribute code, please
 feel free to open an issue or pull request on the GitHub repository.
-
-### Build and execute the snap
-
-```bash
-sudo snap remove justfocus ; snapcraft clean; snapcraft; sudo snap install justfocus_*.*.*_amd64.snap --dangerous; justfocus
-```
 
 ### Screenshot
 
@@ -53,4 +55,29 @@ In order to avoid flickering on Ubuntu:
 
 ```bash
 java -Dsun.java2d.opengl=true -Dsun.java2d.xrender=true -jar just-focus.jar
+```
+
+### Build and execute the snap
+
+```bash
+sudo snap remove justfocus ; snapcraft clean; snapcraft; sudo snap install justfocus_*.*.*_amd64.snap --dangerous; justfocus
+```
+
+#### Build `.deb` package (Linux)
+
+```bash
+jpackage \
+--type deb \
+--name "Just Focus" \
+--vendor "Andrei Dodu" \
+--app-version "1.0.0" \
+--input "target" \
+--main-jar "just-focus.jar" \
+--icon "icon.png" \
+--main-class "com.andreidodu.Main" \
+--dest "." \
+--add-modules java.base,java.desktop \
+--linux-shortcut \
+--java-options "-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true" \
+--verbose
 ```

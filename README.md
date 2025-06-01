@@ -54,7 +54,7 @@ the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Lic
 In order to avoid flickering on Ubuntu:
 
 ```bash
-java -Dsun.java2d.opengl=true -Dsun.java2d.xrender=true -jar just-focus.jar
+-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true
 ```
 
 ### Build and execute the snap

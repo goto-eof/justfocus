@@ -42,6 +42,8 @@ installing it:
 sudo dpkg -i just-focus_*.*.*_amd64.deb
 ```
 
+----
+
 ### Technologies
 
 - Java (Swing)

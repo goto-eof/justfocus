@@ -1,6 +1,6 @@
 #!/bin/bash
-#
-# Script is a wrapper which runs application in a bash script with the needed options
-#
+
 exec $SNAP/custom-jre/bin/java \
+    -Dsun.java2d.opengl=true \
+    -Dsun.java2d.xrender=true \
     -jar $SNAP/jar/just-focus.jar "$@"

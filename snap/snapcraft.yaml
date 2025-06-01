@@ -14,22 +14,11 @@ license: MIT
 compression: xz
 apps:
   justfocus:
-#    environment:
-#      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP_DESKTOP_RUNTIME/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:$SNAP_DESKTOP_RUNTIME/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gio/modules
     command: executor
     extensions: [ gnome ]
     plugs:
-      #      - network
-#      - browser-support
-#      - unity7
-#      - home
-#      - x11
       - desktop
       - wayland
-#      - desktop-legacy
-#      - removable-media
-#      - opengl
-#      - network-bind
 platforms:
   amd64:
     build-on: [ amd64 ]
@@ -50,9 +39,6 @@ parts:
       - maven
     stage-packages:
       - openjdk-21-jre
-    #      - glib-networking
-    #      - libgtk-3-0
-    #      - xdg-utils
     override-prime: |
       snapcraftctl prime
       rm -vf usr/lib/jvm/java-21-openjdk-*64/lib/security/blacklisted.certs

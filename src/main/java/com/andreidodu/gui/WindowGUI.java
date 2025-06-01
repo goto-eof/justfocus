@@ -27,7 +27,6 @@ public class WindowGUI extends JFrame {
         setOpacity(0.7f);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 360.0, 360));
 
-
         JButton closeButton = new JButton("X");
         closeButton.setMargin(new Insets(0, 0, 0, 0));
         closeButton.setBounds(getWidth() / 2 - (20 / 2), 15, 20, 20);

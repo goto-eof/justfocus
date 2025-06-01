@@ -8,7 +8,7 @@ public class CirclePanel extends JPanel {
     private int arcAngle;
     private String timeString = "00:00";
     private final int diameter = 160;
-    private final float thickness = 12f;
+    private final float thickness = 24f;
 
     public String getTimeString() {
         return timeString;
@@ -33,46 +33,49 @@ public class CirclePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
+        Graphics2D g2d = (Graphics2D) g.create();
 
-        int x = (getWidth() - diameter) / 2;
-        int y = (getHeight() - diameter) / 2;
+        try {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
 
-        float thickness = 24f;
-        g2d.setStroke(new BasicStroke(thickness));
+            int x = (getWidth() - diameter) / 2;
+            int y = (getHeight() - diameter) / 2;
 
-        g2d.setColor(new Color(64, 62, 62, 255));
-        g2d.drawOval(x, y, diameter, diameter);
+            g2d.setStroke(new BasicStroke(thickness));
 
-        g2d.setColor(new Color(101, 255, 137, 255));
-        int startAngle = 90;
-        int arcAngle = this.arcAngle;
-        g2d.drawArc(x, y, diameter, diameter, startAngle, arcAngle);
+            g2d.setColor(new Color(64, 62, 62, 255));
+            g2d.drawOval(x, y, diameter, diameter);
+
+            g2d.setColor(new Color(101, 255, 137, 255));
+            int startAngle = 90;
+            g2d.drawArc(x, y, diameter, diameter, startAngle, arcAngle);
 
 
-        int innerDiameter = 80;
-        int innerX = (getWidth() - innerDiameter) / 2;
-        int innerY = (getHeight() - innerDiameter) / 2;
+            int innerDiameter = 80;
+            int innerX = (getWidth() - innerDiameter) / 2;
+            int innerY = (getHeight() - innerDiameter) / 2;
 
-        g2d.setColor(new Color(64, 62, 62, 255));
-        g2d.fillOval(innerX, innerY, innerDiameter, innerDiameter);
+            g2d.setColor(new Color(64, 62, 62, 255));
+            g2d.fillOval(innerX, innerY, innerDiameter, innerDiameter);
 
-        g2d.setStroke(new BasicStroke(2f));
-        g2d.setColor(new Color(255, 255, 255, 255));
-        g2d.drawOval(innerX, innerY, innerDiameter, innerDiameter);
+            g2d.setStroke(new BasicStroke(2f));
+            g2d.setColor(new Color(255, 255, 255, 255));
+            g2d.drawOval(innerX, innerY, innerDiameter, innerDiameter);
 
-        g2d.setFont(new Font("SansSerif", Font.BOLD, 24));
-        FontMetrics fm = g2d.getFontMetrics();
-        int textWidth = fm.stringWidth(getTimeString());
-        int textHeight = fm.getAscent();
+            g2d.setFont(new Font("Arial", Font.BOLD, 24));
+            FontMetrics fm = g2d.getFontMetrics();
+            int textWidth = fm.stringWidth(getTimeString());
+            int textHeight = fm.getAscent();
 
-        int centerX = getWidth() / 2 - textWidth / 2;
-        int centerY = getHeight() / 2 + textHeight / 4;
+            int centerX = getWidth() / 2 - textWidth / 2;
+            int centerY = getHeight() / 2 + textHeight / 4;
 
-        g2d.setColor(Color.WHITE);
-        g2d.drawString(getTimeString(), centerX, centerY);
+            g2d.setColor(Color.WHITE);
+            g2d.drawString(getTimeString(), centerX, centerY);
+        } finally {
+            g2d.dispose();
+        }
     }
 
     public boolean isOnBorder(Point p) {

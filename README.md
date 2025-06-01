@@ -15,6 +15,11 @@ without unnecessary distractions.
   pause functionality, encouraging uninterrupted concentration.
 * **Lightweight & Efficient:** Optimized for size and performance, making it a nimble addition to your workflow.
 
+### Windows installation
+
+Download and install the
+following [executable file](https://github.com/goto-eof/justfocus/releases/download/1.0.0/Just.Focus-1.0.0.exe).
+
 ### Linux Installation (Snap)
 
 JustFocus will be available as a Snap package for easy installation on most Linux distributions.
@@ -88,8 +93,8 @@ jpackage \
 --verbose
 ```
 
-
 ### Build `.exe` file (Windows)
+
 ```bat
 jpackage ^
 --type exe ^

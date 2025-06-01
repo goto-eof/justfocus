@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=JustFocus
+Comment=A distraction-free focus timer
+Exec=justfocus
+Icon=${SNAP}/meta/gui/icon.png
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Utility;Time;Productivity;
+Keywords=focus,timer,productivity,clock,countdown

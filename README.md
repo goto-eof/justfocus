@@ -1,4 +1,4 @@
-# JustFocus
+# Just Focus
 
 ### A Distraction-Free Focus Timer for Linux Desktops
 

@@ -63,7 +63,7 @@ java -Dsun.java2d.opengl=true -Dsun.java2d.xrender=true -jar just-focus.jar
 sudo snap remove justfocus ; snapcraft clean; snapcraft; sudo snap install justfocus_*.*.*_amd64.snap --dangerous; justfocus
 ```
 
-#### Build `.deb` package (Linux)
+### Build `.deb` package (Linux)
 
 ```bash
 jpackage \

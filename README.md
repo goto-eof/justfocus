@@ -42,3 +42,11 @@ sudo snap remove justfocus ; snapcraft clean; snapcraft; sudo snap install justf
 
 This project is licensed under
 the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+#### Flickering
+
+In order to avoid flickering on Ubuntu:
+
+```bash
+java -Dsun.java2d.opengl=true -Dsun.java2d.xrender=true -jar just-focus.jar
+```

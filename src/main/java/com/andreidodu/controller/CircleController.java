@@ -31,8 +31,8 @@ public class CircleController implements CircleObserver {
             long remainingTime = timeCounter.getAndSet(timeCounter.get() - 1000);
             String remainingTimeString = toMinuteSeconds(remainingTime);
 
+            arcCounter.set(calculated[0]);
             SwingUtilities.invokeLater(() -> {
-                arcCounter.set(calculated[0]);
                 window.getCircle().setArcAngle(calculated[0].intValue());
                 window.getCircle().setTimeString(remainingTimeString);
                 window.getCircle().repaint();

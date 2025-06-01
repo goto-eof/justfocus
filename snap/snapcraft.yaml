@@ -72,24 +72,10 @@ parts:
       fi
       
       export MAVEN_OPTS="$http $https"
-      # --- FINE GESTIONE PROXY PER MAVEN ---
       
-      # 1. Build your application using Maven
-      # This command will now respect the MAVEN_OPTS set above
       mvn clean install -DskipTests
       
-      # Assuming your main JAR is in 'target/your-app.jar' after Maven build
-      # And any other required libraries are in 'target/lib/'
-      
-      # 2. Identify modules using jdeps (adjust module path for your actual libs)
-      # You might need to adjust 'your-app.jar' path if Maven outputs it elsewhere
-      # For a Swing app, java.base and java.desktop are minimums.
-      # Example: jdeps --print-module-deps target/your-app.jar
-      
-      # 3. Create the custom JRE using jlink
-      # Use the JDK installed via build-packages. Adjust JAVA_HOME path if different.
-      # Typically, it's /usr/lib/jvm/java-<version>-openjdk-<arch>
-      JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64" # VERIFICA QUESTO PERCORSO!
+      JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
       "$JAVA_HOME"/bin/jlink --module-path "$JAVA_HOME"/jmods \
                              --add-modules java.base,java.desktop \
                              --output custom-jre \
@@ -97,13 +83,7 @@ parts:
                              --no-header-files \
                              --no-man-pages
       
-      # 4. Copy your application JAR and the custom JRE to the install directory
-      # Assuming Maven puts your main JAR in 'target/'
-      cp target/your-app.jar "$SNAPCRAFT_PART_INSTALL"/
+      mkdir -p "$SNAPCRAFT_PART_INSTALL"/jar
+      
+      cp target/just-focus.jar "$SNAPCRAFT_PART_INSTALL"/jar/just-focus.jar
       cp -r custom-jre "$SNAPCRAFT_PART_INSTALL"/
-    stage-packages:
-      - openjdk-21-jre
-    override-prime: |
-      snapcraftctl prime
-      rm -vf usr/lib/jvm/java-21-openjdk-*64/lib/security/blacklisted.certs
-

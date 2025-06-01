@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=JustFocus
+Name=Just Focus
 Comment=A distraction-free focus timer
 Exec=justfocus
 Icon=${SNAP}/meta/gui/icon.png

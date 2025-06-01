@@ -31,7 +31,7 @@ public class WindowGUI extends JFrame {
         closeButton.setMargin(new Insets(0, 0, 0, 0));
         closeButton.setBounds(getWidth() / 2 - (20 / 2), 15, 20, 20);
         closeButton.setFocusable(false);
-        closeButton.setFont(new Font("SansSerif", Font.BOLD, 12));
+        closeButton.setFont(new Font("Arial", Font.BOLD, 12));
         closeButton.setBackground(new Color(64, 62, 62, 255));
         closeButton.setForeground(Color.WHITE);
         closeButton.setBorderPainted(false);

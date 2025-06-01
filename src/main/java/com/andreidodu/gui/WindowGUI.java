@@ -9,7 +9,7 @@ import java.awt.geom.RoundRectangle2D;
 
 public class WindowGUI extends JFrame {
     private CirclePanel circle;
-    private CircleObserver circleObserver;
+    private final CircleObserver circleObserver;
     private Point initialClick;
 
     public CirclePanel getCircle() {
@@ -38,7 +38,6 @@ public class WindowGUI extends JFrame {
         closeButton.addActionListener(e -> System.exit(0));
 
         add(closeButton);
-
 
         CirclePanel circlePanel = new CirclePanel();
         this.circle = circlePanel;

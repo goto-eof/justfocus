@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.geom.RoundRectangle2D;
 
 public class WindowGUI extends JFrame {
     private CirclePanel circle;
@@ -24,9 +25,14 @@ public class WindowGUI extends JFrame {
         setSize(160, 160);
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
+
+        setOpacity(0.7f);
+        setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 360.0, 360));
+
+
         JButton closeButton = new JButton("X");
         closeButton.setMargin(new Insets(0, 0, 0, 0));
-        closeButton.setBounds(130, 10, 20, 20);
+        closeButton.setBounds(getWidth() / 2 - (20 / 2), 15, 20, 20);
         closeButton.setFocusable(false);
         closeButton.setFont(new Font("SansSerif", Font.BOLD, 12));
         closeButton.setBackground(new Color(255, 0, 0, 180));

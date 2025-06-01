@@ -14,20 +14,21 @@ license: MIT
 compression: xz
 apps:
   justfocus:
-    environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP_DESKTOP_RUNTIME/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:$SNAP_DESKTOP_RUNTIME/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gio/modules
+#    environment:
+#      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP_DESKTOP_RUNTIME/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:$SNAP_DESKTOP_RUNTIME/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gio/modules
     command: executor
     extensions: [ gnome ]
     plugs:
       #      - network
-      - x11
 #      - browser-support
 #      - unity7
 #      - home
+#      - x11
       - desktop
-      - desktop-legacy
-#      - removable-media
       - wayland
+#      - desktop-legacy
+#      - removable-media
+#      - opengl
 #      - network-bind
 platforms:
   amd64:

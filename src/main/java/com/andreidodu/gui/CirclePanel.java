@@ -6,8 +6,8 @@ import java.awt.*;
 public class CirclePanel extends JPanel {
 
     private int arcAngle;
-    private String timeString = "";
-    private final int diameter = 200;
+    private String timeString = "00:00";
+    private final int diameter = 160;
     private final float thickness = 12f;
 
     public String getTimeString() {
@@ -33,19 +33,17 @@ public class CirclePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int diameter = 100;
         int x = (getWidth() - diameter) / 2;
         int y = (getHeight() - diameter) / 2;
 
-        float thickness = 8f;
+        float thickness = 24f;
         g2d.setStroke(new BasicStroke(thickness));
 
-        g2d.setColor(new Color(131, 130, 130, 202));
+        g2d.setColor(new Color(64, 62, 62, 255));
         g2d.drawOval(x, y, diameter, diameter);
 
         g2d.setColor(new Color(101, 255, 137, 255));
@@ -54,19 +52,17 @@ public class CirclePanel extends JPanel {
         g2d.drawArc(x, y, diameter, diameter, startAngle, arcAngle);
 
 
-        // Inner circle
         int innerDiameter = 80;
         int innerX = (getWidth() - innerDiameter) / 2;
         int innerY = (getHeight() - innerDiameter) / 2;
 
-        g2d.setColor(new Color(64, 62, 62, 202));
+        g2d.setColor(new Color(64, 62, 62, 255));
         g2d.fillOval(innerX, innerY, innerDiameter, innerDiameter);
 
         g2d.setStroke(new BasicStroke(2f));
-        g2d.setColor(new Color(255, 255, 255, 80));
+        g2d.setColor(new Color(255, 255, 255, 255));
         g2d.drawOval(innerX, innerY, innerDiameter, innerDiameter);
 
-        // Text
         g2d.setFont(new Font("SansSerif", Font.BOLD, 24));
         FontMetrics fm = g2d.getFontMetrics();
         int textWidth = fm.stringWidth(getTimeString());

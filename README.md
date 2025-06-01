@@ -87,3 +87,23 @@ jpackage \
 --java-options "-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true" \
 --verbose
 ```
+
+
+### Build `.exe` file (Windows)
+```bat
+jpackage ^
+--type exe ^
+--name "Just Focus" ^
+--vendor "Andrei Dodu" ^
+--app-version "1.0.0" ^
+--input "target" ^
+--main-jar "just-focus.jar" ^
+--icon "icon.ico" ^
+--main-class "com.andreidodu.Main" ^
+--dest "." ^
+--add-modules java.base,java.desktop ^
+--java-options "-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true" ^
+--verbose ^
+--win-shortcut ^
+--win-menu
+```

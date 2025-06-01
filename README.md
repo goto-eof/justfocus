@@ -40,7 +40,7 @@ sudo snap remove justfocus ; snapcraft clean; snapcraft; sudo snap install justf
 
 ### Screenshot
 
-[screenshot](images/screenshot.png)
+![screenshot](images/screenshot.png)
 
 ### License
 

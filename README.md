@@ -49,6 +49,10 @@ feel free to open an issue or pull request on the GitHub repository.
 This project is licensed under
 the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
+----
+
+# Useful stuff
+
 ### Flickering
 
 In order to avoid flickering on Ubuntu:

@@ -26,7 +26,7 @@ following [executable file](https://github.com/goto-eof/justfocus/releases/downl
 
 ### Linux Installation (Snap)
 
-JustFocus will be available as a Snap package for easy installation on most Linux distributions.
+JustFocus is available as a Snap package for easy installation on most Linux distributions.
 
 ```bash
 sudo snap install justfocus

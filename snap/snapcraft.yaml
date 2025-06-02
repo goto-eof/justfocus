@@ -60,9 +60,9 @@ parts:
       mvn clean install -DskipTests
       
       
-       if [ "$SNAPCRAFT_ARCH" = "amd64" ]; then
+       if [ "$SNAP_ARCH" = "amd64" ]; then
           JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
-      elif [ "$SNAPCRAFT_ARCH" = "arm64" ]; then
+      elif [ "$SNAP_ARCH" = "arm64" ]; then
           JAVA_HOME="/usr/lib/jvm/java-21-openjdk-arm64"
       fi
       

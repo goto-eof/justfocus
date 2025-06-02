@@ -31,34 +31,53 @@ public class WindowGUI extends JFrame {
         setOpacity(0.8f);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 360.0, 360));
 
-        RoundButton closeButton = prepareButton("close.png", circleObserver::exit, " X");
+        RoundButton closeButton = prepareButton("close.png", circleObserver::exit);
         closeButton.setBounds(getWidth() / 2 - (20 / 2), getHeight() - 35, 20, 20);
         add(closeButton);
-        RoundButton upButton = prepareButton("up.png", circleObserver::increaseTimer, "↑");
-        upButton.setBounds(getWidth() / 2 - (20 / 2) + 30, 25, 20, 20);
+
+
+        RoundButton upButton = prepareButton("up.png", circleObserver::increaseTimer);
+        upButton.setBounds(getWidth() - 35, getHeight() / 2 - 10, 20, 20);
         add(upButton);
-        RoundButton downButton = prepareButton("down.png", circleObserver::decreaseTimer, "↓");
-        downButton.setBounds(getWidth() / 2 - (20 / 2) - 30, 25, 20, 20);
+        RoundButton downButton = prepareButton("down.png", circleObserver::decreaseTimer);
+        downButton.setBounds(15, getHeight() / 2 - 10, 20, 20);
         add(downButton);
 
-        RoundButton aboutButton = prepareButton("about.png", this::showAbout, " ?");
-        aboutButton.setBounds(getWidth() / 2 - (20 / 2), 15, 20, 20);
-        add(aboutButton);
+
+//        RoundButton aboutButton = prepareButton("about.png", this::showAbout, " ?");
+//        aboutButton.setBounds(getWidth() / 2 - (20 / 2), 15, 20, 20);
+//        add(aboutButton);
 
         CirclePanel circlePanel = new CirclePanel();
         this.circle = circlePanel;
         circlePanel.setBounds(0, 40, 300, 260);
         add(circlePanel);
         setVisible(true);
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem menuItem1 = new JMenuItem("About");
+        JMenuItem menuItem2 = new JMenuItem("Exit");
+        popupMenu.add(menuItem1);
+        popupMenu.add(menuItem2);
 
+        menuItem1.addActionListener(e -> showAbout());
+        menuItem2.addActionListener(e -> System.exit(0));
 
         circlePanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (circlePanel.isOnBorder(e.getPoint())) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    showPopup(e);
+                }
+                if (SwingUtilities.isLeftMouseButton(e) && circlePanel.isOnBorder(e.getPoint())) {
                     initialClick = e.getPoint();
                 } else {
                     initialClick = null;
+                }
+            }
+
+            private void showPopup(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
             }
         });
@@ -104,11 +123,11 @@ public class WindowGUI extends JFrame {
 
 
     private void showAbout() {
-        JOptionPane.showMessageDialog(null, "<html>Developer: Andrei Dodu<br/>Project webpage: https://github.com/goto-eof/justfocus</html>", "About", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "<html>Just Focus<br/>Version: 2.5.0<br/>Developer: Andrei Dodu<br/>Project webpage: https://github.com/goto-eof/justfocus<br/>License; CC BY-NC-SA 4.0</html>", "About", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private RoundButton prepareButton(String imageFile, Runnable runnable, String label) {
-        RoundButton button = new RoundButton(buildBufferedImage("/images/" + imageFile), label);
+    private RoundButton prepareButton(String imageFile, Runnable runnable) {
+        RoundButton button = new RoundButton(buildBufferedImage("/images/" + imageFile));
         button.addActionListener(e -> runnable.run());
         button.addMouseListener(new MouseAdapter() {
             @Override

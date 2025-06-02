@@ -11,14 +11,14 @@ class RoundButton extends JButton {
     private final BufferedImage bufferedImage;
     private boolean isHovered = false;
 
-    public RoundButton(BufferedImage bufferedImage, String label) {
-        super(label);
+    public RoundButton(BufferedImage bufferedImage) {
+        super();
         this.bufferedImage = bufferedImage;
         setFocusable(false);
         setContentAreaFilled(false);
         setBorderPainted(false);
         setFocusPainted(false);
-        setPreferredSize(new Dimension(16, 16));
+        setPreferredSize(new Dimension(20, 20));
 
         setMargin(new Insets(0, 0, 0, 0));
         setFont(new Font("Arial", Font.BOLD, 14));
@@ -28,19 +28,26 @@ class RoundButton extends JButton {
 
     @Override
     protected void paintComponent(Graphics g) {
-
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g.create();
+        int cornerRadius = 20;
         if (isHovered) {
-            g.setColor(BACKGROUND_COLOR);
-            g.fillOval(0, 0, getWidth(), getHeight());
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            g.setColor(Color.BLACK);
-            g.drawOval(0, 0, getWidth(), getHeight());
+            g2.setColor(BACKGROUND_COLOR);
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), cornerRadius, cornerRadius);
+
+            g2.setColor(Color.BLACK);
+            g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, cornerRadius, cornerRadius);
         }
+
         if (bufferedImage != null) {
             int imgX = (getWidth() - bufferedImage.getWidth()) / 2;
             int imgY = (getHeight() - bufferedImage.getHeight()) / 2;
             g.drawImage(bufferedImage, imgX, imgY, null);
         }
+
+        g2.dispose();
     }
 
     @Override

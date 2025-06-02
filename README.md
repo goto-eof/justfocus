@@ -22,7 +22,7 @@ without unnecessary distractions.
 ### Windows installation
 
 Download and install the
-following [executable file](https://github.com/goto-eof/justfocus/releases/download/1.0.0/Just.Focus-2.0.0.exe).
+following [executable file](https://github.com/goto-eof/justfocus/releases/download/2.0.0/Just.Focus-2.0.0.exe).
 
 ### Linux Installation (Snap)
 
@@ -35,7 +35,7 @@ sudo snap install justfocus
 ### Linux Installation (dpkg)
 
 For now, it is possible to install Just Focus by downloading the
-`.deb` [package](https://github.com/goto-eof/justfocus/releases/download/1.0.0/just-focus_2.0.0_amd64.deb) and by
+`.deb` [package](https://github.com/goto-eof/justfocus/releases/download/2.0.0/just-focus_2.0.0_amd64.deb) and by
 installing it:
 
 ```bash

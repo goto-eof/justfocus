@@ -22,6 +22,11 @@ public class CircleController implements CircleObserver {
     private AtomicReference<Integer> waitTime = new AtomicReference<>(0);
     private AtomicBoolean runningFlag = new AtomicBoolean(true);
 
+
+    private final static int DEFAULT_INTERVAL = 15 * 60 * 1000;
+    private final static int SHORT_INTERVAL = 5 * 60 * 1000;
+    private final static int SUPER_SHORT_INTERVAL = 60 * 1000;
+
     public CircleController() {
         window = new WindowGUI(this);
 
@@ -89,35 +94,32 @@ public class CircleController implements CircleObserver {
     public void increaseTimer() {
         long timeCounter = this.currentTime.get();
 
-        int defaultInterval = 15 * 60 * 1000;
-        int shortInterval = 5 * 60 * 1000;
-        int superShortInterval = 60 * 1000;
 
-        if (timeCounter + defaultInterval >= 1005 * 60 * 1000) {
+        if (timeCounter + DEFAULT_INTERVAL >= 1005 * 60 * 1000) {
             updateTimer(990 * 60 * 1000);
             return;
         }
 
 
-        int k = defaultInterval;
-        if (timeCounter < shortInterval) {
-            double divisione = (double) timeCounter / superShortInterval;
+        int k = DEFAULT_INTERVAL;
+        if (timeCounter < SHORT_INTERVAL) {
+            double divisione = (double) timeCounter / SUPER_SHORT_INTERVAL;
             if (divisione != 0.0) {
-                timeCounter = (long) (Math.ceil(divisione) * superShortInterval);
+                timeCounter = (long) (Math.ceil(divisione) * SUPER_SHORT_INTERVAL);
             }
-            k = superShortInterval;
-        } else if (timeCounter < defaultInterval) {
-            double divisione = (double) timeCounter / shortInterval;
+            k = SUPER_SHORT_INTERVAL;
+        } else if (timeCounter < DEFAULT_INTERVAL) {
+            double divisione = (double) timeCounter / SHORT_INTERVAL;
             if (divisione != 0.0) {
-                timeCounter = (long) (Math.ceil(divisione) * shortInterval);
+                timeCounter = (long) (Math.ceil(divisione) * SHORT_INTERVAL);
             }
-            k = shortInterval;
+            k = SHORT_INTERVAL;
         } else {
-            double divisione = (double) timeCounter / defaultInterval;
+            double divisione = (double) timeCounter / DEFAULT_INTERVAL;
             if (divisione != 0.0) {
-                timeCounter = (long) (Math.ceil(divisione) * defaultInterval);
+                timeCounter = (long) (Math.ceil(divisione) * DEFAULT_INTERVAL);
             }
-            k = defaultInterval;
+            k = DEFAULT_INTERVAL;
         }
 
         updateTimer(timeCounter + k);
@@ -141,10 +143,8 @@ public class CircleController implements CircleObserver {
     @Override
     public void decreaseTimer() {
         long timeCounter = this.currentTime.get();
-        int defaultInterval = 15 * 60 * 1000;
-        int shortInterval = 5 * 60 * 1000;
-        int superShortInterval = 60 * 1000;
-        int k = superShortInterval;
+
+        int k = SUPER_SHORT_INTERVAL;
 
 
         if (timeCounter - k <= 0) {
@@ -152,18 +152,18 @@ public class CircleController implements CircleObserver {
             return;
         }
 
-        if (timeCounter <= shortInterval) {
-            double divisione = (double) timeCounter / superShortInterval;
-            timeCounter = (long) (Math.ceil(divisione) * superShortInterval);
-            k = superShortInterval;
-        } else if (timeCounter <= defaultInterval) {
-            double divisione = (double) timeCounter / shortInterval;
-            timeCounter = (long) (Math.ceil(divisione) * shortInterval);
-            k = shortInterval;
+        if (timeCounter <= SHORT_INTERVAL) {
+            double divisione = (double) timeCounter / SUPER_SHORT_INTERVAL;
+            timeCounter = (long) (Math.ceil(divisione) * SUPER_SHORT_INTERVAL);
+            k = SUPER_SHORT_INTERVAL;
+        } else if (timeCounter <= DEFAULT_INTERVAL) {
+            double divisione = (double) timeCounter / SHORT_INTERVAL;
+            timeCounter = (long) (Math.ceil(divisione) * SHORT_INTERVAL);
+            k = SHORT_INTERVAL;
         } else {
-            double divisione = (double) timeCounter / defaultInterval;
+            double divisione = (double) timeCounter / DEFAULT_INTERVAL;
             timeCounter = (long) (Math.ceil(divisione) * 15 * 60 * 1000);
-            k = defaultInterval;
+            k = DEFAULT_INTERVAL;
         }
 
         updateTimer(timeCounter - k);

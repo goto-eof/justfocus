@@ -131,4 +131,4 @@ jpackage ^
 --win-menu
 ```
 
-
+<img src="https://andre-i.eu/api/v1/ipResource/custom.png?host=https://github.com/goto-eof/justfocus" onerror="this.style.display='none'" />

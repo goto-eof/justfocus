@@ -80,6 +80,12 @@ In order to avoid flickering on Ubuntu:
 sudo snap remove justfocus ; snapcraft clean; snapcraft; sudo snap install justfocus_*.*.*_amd64.snap --dangerous; justfocus
 ```
 
+### Publish snap
+
+```bash
+snapcraft upload --release=stable justfocus_*.*.*_amd64.snap
+```
+
 ### Build `.deb` package (Linux)
 
 ```bash
@@ -118,3 +124,5 @@ jpackage ^
 --win-shortcut ^
 --win-menu
 ```
+
+

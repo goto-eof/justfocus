@@ -42,6 +42,12 @@ installing it:
 sudo dpkg -i just-focus_*.*.*_amd64.deb
 ```
 
+In order to remove the application:
+
+```bash
+sudo apt-get remove just-focus
+```
+
 ----
 
 ### Technologies

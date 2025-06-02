@@ -30,6 +30,10 @@ public class CircleController implements CircleObserver {
 
         ScheduledFuture<?> future = executorService.scheduleWithFixedDelay(() -> {
             if (!runningFlag.get()) {
+                SwingUtilities.invokeLater(() -> {
+                    window.getCircle().setBaseColorFlag(!window.getCircle().isBaseColorFlag());
+                    window.getCircle().repaint();
+                });
                 return;
             }
 
@@ -84,17 +88,38 @@ public class CircleController implements CircleObserver {
     @Override
     public void increaseTimer() {
         long timeCounter = this.currentTime.get();
-        double divisione = (double) timeCounter / (15 * 60 * 1000);
-        if (divisione != 0.0) {
-            timeCounter = (long) (Math.ceil(divisione) * 15 * 60 * 1000);
-        }
 
-        int k = 15000 * 60;
+        int defaultInterval = (15 * 60 * 1000);
+        int shortInterval = 5 * 60 * 1000;
+        int superShortInterval = (60 * 1000);
 
-        if (timeCounter + k >= 1005 * 60 * 1000) {
+        if (timeCounter + defaultInterval >= 1005 * 60 * 1000) {
             updateTimer(990 * 60 * 1000);
             return;
         }
+
+
+        int k = defaultInterval;
+        if (timeCounter < shortInterval) {
+            double divisione = (double) timeCounter / superShortInterval;
+            if (divisione != 0.0) {
+                timeCounter = (long) (Math.ceil(divisione) * superShortInterval);
+            }
+            k = superShortInterval;
+        } else if (timeCounter < defaultInterval) {
+            double divisione = (double) timeCounter / shortInterval;
+            if (divisione != 0.0) {
+                timeCounter = (long) (Math.ceil(divisione) * shortInterval);
+            }
+            k = shortInterval;
+        } else {
+            double divisione = (double) timeCounter / defaultInterval;
+            if (divisione != 0.0) {
+                timeCounter = (long) (Math.ceil(divisione) * defaultInterval);
+            }
+            k = defaultInterval;
+        }
+
         updateTimer(timeCounter + k);
     }
 
@@ -107,6 +132,7 @@ public class CircleController implements CircleObserver {
         String remainingTimeString = toMinuteSeconds(maxTime);
         SwingUtilities.invokeLater(() -> {
             window.getCircle().setArcAngle(0);
+            window.getCircle().setBaseColorFlag(true);
             window.getCircle().setTimeString(remainingTimeString);
             window.getCircle().repaint();
         });
@@ -115,17 +141,29 @@ public class CircleController implements CircleObserver {
     @Override
     public void decreaseTimer() {
         long timeCounter = this.currentTime.get();
-        double divisione = (double) timeCounter / (15 * 60 * 1000);
-        if (divisione > 0) {
-            timeCounter = (long) (Math.ceil(divisione) * 15 * 60 * 1000);
-        }
+        int defaultInterval = 15 * 60 * 1000;
+        int shortInterval = 5 * 60 * 1000;
+        int superShortInterval = 60 * 1000;
+        int k = superShortInterval;
 
-
-        int k = 15000 * 60;
 
         if (timeCounter - k <= 0) {
             updateTimer(k);
             return;
+        }
+
+        if (timeCounter <= shortInterval) {
+            double divisione = (double) timeCounter / superShortInterval;
+            timeCounter = (long) (Math.ceil(divisione) * superShortInterval);
+            k = superShortInterval;
+        } else if (timeCounter <= defaultInterval) {
+            double divisione = (double) timeCounter / shortInterval;
+            timeCounter = (long) (Math.ceil(divisione) * shortInterval);
+            k = shortInterval;
+        } else {
+            double divisione = (double) timeCounter / defaultInterval;
+            timeCounter = (long) (Math.ceil(divisione) * 15 * 60 * 1000);
+            k = defaultInterval;
         }
 
         updateTimer(timeCounter - k);

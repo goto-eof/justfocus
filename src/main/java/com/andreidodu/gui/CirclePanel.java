@@ -10,6 +10,7 @@ public class CirclePanel extends JPanel {
     private final int diameter = 160;
     private final float thickness = 24f;
     private final int FONT_SIZE = 20;
+    private boolean baseColorFlag = true;
 
     public String getTimeString() {
         return timeString;
@@ -21,6 +22,14 @@ public class CirclePanel extends JPanel {
 
     public CirclePanel() {
         setOpaque(false);
+    }
+
+    public boolean isBaseColorFlag() {
+        return baseColorFlag;
+    }
+
+    public void setBaseColorFlag(boolean baseColorFlag) {
+        this.baseColorFlag = baseColorFlag;
     }
 
     public int getArcAngle() {
@@ -48,7 +57,11 @@ public class CirclePanel extends JPanel {
             g2d.setColor(new Color(64, 62, 62, 255));
             g2d.drawOval(x, y, diameter, diameter);
 
-            g2d.setColor(new Color(101, 255, 137, 255));
+            if (baseColorFlag) {
+                g2d.setColor(new Color(101, 255, 137, 255));
+            } else {
+                g2d.setColor(new Color(255, 101, 101, 255));
+            }
             int startAngle = 90;
             g2d.drawArc(x, y, diameter, diameter, startAngle, arcAngle);
 

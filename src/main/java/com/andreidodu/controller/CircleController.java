@@ -12,6 +12,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.andreidodu.util.TimeUtil.toMinuteSeconds;
+
 public class CircleController implements CircleObserver {
 
     private ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
@@ -26,14 +28,11 @@ public class CircleController implements CircleObserver {
     private final static int DEFAULT_INTERVAL = 15 * 60 * 1000;
     private final static int SHORT_INTERVAL = 5 * 60 * 1000;
     private final static int SUPER_SHORT_INTERVAL = 60 * 1000;
+    private ScheduledFuture<?> futureHolder;
 
     public CircleController() {
         window = new WindowGUI(this);
-
-        final ScheduledFuture<?>[] futureHolder = new ScheduledFuture<?>[1];
-
-
-        ScheduledFuture<?> future = executorService.scheduleWithFixedDelay(() -> {
+        futureHolder = executorService.scheduleWithFixedDelay(() -> {
             if (!runningFlag.get()) {
                 SwingUtilities.invokeLater(() -> {
                     window.getCircle().setBaseColorFlag(!window.getCircle().isBaseColorFlag());
@@ -65,22 +64,14 @@ public class CircleController implements CircleObserver {
             }
 
         }, 1000L, 1000, TimeUnit.MILLISECONDS);
-        futureHolder[0] = future;
 
-    }
-
-
-    private String toMinuteSeconds(long time) {
-
-        long totalSeconds = time / 1000;
-        long minutes = totalSeconds / 60;
-        long seconds = totalSeconds % 60;
-
-        return String.format("%02d:%02d", minutes, seconds);
     }
 
     @Override
     public void releaseResources() {
+        if (futureHolder != null) {
+            futureHolder.cancel(true);
+        }
         if (executorService != null && !executorService.isShutdown()) {
             try {
                 executorService.shutdownNow();

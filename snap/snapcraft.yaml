@@ -10,7 +10,7 @@ icon: snap/gui/icon.png
 title: JustFocus
 website: https://andre-i.eu
 issues: https://github.com/goto-eof
-license: MIT
+license: Creative Commons Attribution-NonCommercial
 compression: xz
 apps:
   justfocus:

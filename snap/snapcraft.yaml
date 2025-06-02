@@ -59,7 +59,13 @@ parts:
       
       mvn clean install -DskipTests
       
-      JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
+      
+       if [ "$SNAPCRAFT_ARCH" = "amd64" ]; then
+          JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
+      elif [ "$SNAPCRAFT_ARCH" = "arm64" ]; then
+          JAVA_HOME="/usr/lib/jvm/java-21-openjdk-arm64"
+      fi
+      
       "$JAVA_HOME"/bin/jlink --module-path "$JAVA_HOME"/jmods \
                              --add-modules java.base,java.desktop \
                              --output custom-jre \

@@ -37,24 +37,9 @@ parts:
       - openjdk-21-jdk
       - maven
     override-build: |
-      getproxy() {
-          local proxy_url="$1"
-          local proto=$(echo "$proxy_url" | sed -E 's/^(http|https):\/\///; s/:.*//')
-          local user_pass=$(echo "$proxy_url" | sed -E 's/^(http|https):\/\///; s/@.*//; s/:/ /' | grep " ")
-          local host_port=$(echo "$proxy_url" | sed -E 's/^(http|https):\/\///; s/.*@//' | grep ":")
-      
-          if [ -n "$user_pass" ]; then
-              user=$(echo "$user_pass" | cut -d' ' -f1)
-              pass=$(echo "$user_pass" | cut -d' ' -f2)
-          fi
-      
-          if [ -n "$host_port" ]; then
-              host=$(echo "$host_port" | cut -d':' -f1)
-              port=$(echo "$host_port" | cut -d':' -f2)
-          else
-              host=$(echo "$proxy_url" | sed -E 's/^(http|https):\/\///')
-              port="" # Default port for http/https will be used if not specified
-          fi
+      getproxy () {
+        host=$(echo "$1" | sed -E 's|https?://([^:/]*):?[0-9]*/?|\1|')
+        port=$(echo "$1" | sed -E 's|https?://[^:/]*:?([0-9]*)/?|\1|')
       }
       
       http=""

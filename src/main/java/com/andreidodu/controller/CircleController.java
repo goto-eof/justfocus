@@ -89,9 +89,9 @@ public class CircleController implements CircleObserver {
     public void increaseTimer() {
         long timeCounter = this.currentTime.get();
 
-        int defaultInterval = (15 * 60 * 1000);
+        int defaultInterval = 15 * 60 * 1000;
         int shortInterval = 5 * 60 * 1000;
-        int superShortInterval = (60 * 1000);
+        int superShortInterval = 60 * 1000;
 
         if (timeCounter + defaultInterval >= 1005 * 60 * 1000) {
             updateTimer(990 * 60 * 1000);

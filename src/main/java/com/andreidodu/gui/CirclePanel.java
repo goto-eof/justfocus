@@ -9,6 +9,7 @@ public class CirclePanel extends JPanel {
     private String timeString = "00:00";
     private final int diameter = 160;
     private final float thickness = 24f;
+    private final int FONT_SIZE = 20;
 
     public String getTimeString() {
         return timeString;
@@ -63,7 +64,7 @@ public class CirclePanel extends JPanel {
             g2d.setColor(new Color(255, 255, 255, 255));
             g2d.drawOval(innerX, innerY, innerDiameter, innerDiameter);
 
-            g2d.setFont(new Font("Arial", Font.BOLD, 24));
+            g2d.setFont(new Font("Arial", Font.BOLD, FONT_SIZE));
             FontMetrics fm = g2d.getFontMetrics();
             int textWidth = fm.stringWidth(getTimeString());
             int textHeight = fm.getAscent();

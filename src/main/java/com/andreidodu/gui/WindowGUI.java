@@ -27,17 +27,19 @@ public class WindowGUI extends JFrame {
         setOpacity(0.7f);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 360.0, 360));
 
-        JButton closeButton = new JButton("X");
-        closeButton.setMargin(new Insets(0, 0, 0, 0));
-        closeButton.setBounds(getWidth() / 2 - (20 / 2), 15, 20, 20);
-        closeButton.setFocusable(false);
-        closeButton.setFont(new Font("Arial", Font.BOLD, 12));
-        closeButton.setBackground(new Color(64, 62, 62, 255));
-        closeButton.setForeground(Color.WHITE);
-        closeButton.setBorderPainted(false);
-        closeButton.addActionListener(e -> System.exit(0));
-
+        RoundButton closeButton = prepareCloseButton(circleObserver::exit, " X");
+        closeButton.setBounds(getWidth() / 2 - (20 / 2), getHeight() - 35, 20, 20);
         add(closeButton);
+        RoundButton upButton = prepareCloseButton(circleObserver::increaseTimer, "↑");
+        upButton.setBounds(getWidth() / 2 - (20 / 2) + 30, 25, 20, 20);
+        add(upButton);
+        RoundButton downButton = prepareCloseButton(circleObserver::decreaseTimer, "↓");
+        downButton.setBounds(getWidth() / 2 - (20 / 2) - 30, 25, 20, 20);
+        add(downButton);
+
+        RoundButton aboutButton = prepareCloseButton(this::showAbout, " ?");
+        aboutButton.setBounds(getWidth() / 2 - (20 / 2), 15, 20, 20);
+        add(aboutButton);
 
         CirclePanel circlePanel = new CirclePanel();
         this.circle = circlePanel;
@@ -56,6 +58,7 @@ public class WindowGUI extends JFrame {
                 }
             }
         });
+
 
         circlePanel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -83,6 +86,28 @@ public class WindowGUI extends JFrame {
                 System.exit(0);
             }
         });
+
+        addMouseWheelListener(e -> {
+            if (e.getWheelRotation() < 0) {
+                circleObserver.increaseTimer();
+            } else if (e.getWheelRotation() > 0) {
+                circleObserver.decreaseTimer();
+            }
+        });
+
+
+    }
+
+
+    private void showAbout() {
+        JOptionPane.showMessageDialog(null, "<html>Developer: Andrei Dodu<br/>Project webpage: https://github.com/goto-eof/justfocus</html>", "About", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private RoundButton prepareCloseButton(Runnable runnable, String label) {
+        RoundButton closeButton = new RoundButton(label);
+
+        closeButton.addActionListener(e -> runnable.run());
+        return closeButton;
     }
 
 

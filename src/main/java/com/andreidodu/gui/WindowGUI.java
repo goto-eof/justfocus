@@ -2,10 +2,14 @@ package com.andreidodu.gui;
 
 import com.andreidodu.observer.CircleObserver;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class WindowGUI extends JFrame {
     private CirclePanel circle;
@@ -27,17 +31,17 @@ public class WindowGUI extends JFrame {
         setOpacity(0.8f);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 360.0, 360));
 
-        RoundButton closeButton = prepareCloseButton(circleObserver::exit, " X");
+        RoundButton closeButton = prepareButton("close.png", circleObserver::exit, " X");
         closeButton.setBounds(getWidth() / 2 - (20 / 2), getHeight() - 35, 20, 20);
         add(closeButton);
-        RoundButton upButton = prepareCloseButton(circleObserver::increaseTimer, "↑");
+        RoundButton upButton = prepareButton("up.png", circleObserver::increaseTimer, "↑");
         upButton.setBounds(getWidth() / 2 - (20 / 2) + 30, 25, 20, 20);
         add(upButton);
-        RoundButton downButton = prepareCloseButton(circleObserver::decreaseTimer, "↓");
+        RoundButton downButton = prepareButton("down.png", circleObserver::decreaseTimer, "↓");
         downButton.setBounds(getWidth() / 2 - (20 / 2) - 30, 25, 20, 20);
         add(downButton);
 
-        RoundButton aboutButton = prepareCloseButton(this::showAbout, " ?");
+        RoundButton aboutButton = prepareButton("about.png", this::showAbout, " ?");
         aboutButton.setBounds(getWidth() / 2 - (20 / 2), 15, 20, 20);
         add(aboutButton);
 
@@ -103,11 +107,49 @@ public class WindowGUI extends JFrame {
         JOptionPane.showMessageDialog(null, "<html>Developer: Andrei Dodu<br/>Project webpage: https://github.com/goto-eof/justfocus</html>", "About", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private RoundButton prepareCloseButton(Runnable runnable, String label) {
-        RoundButton closeButton = new RoundButton(label);
+    private RoundButton prepareButton(String imageFile, Runnable runnable, String label) {
+        RoundButton button = new RoundButton(buildBufferedImage("/images/" + imageFile), label);
+        button.addActionListener(e -> runnable.run());
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setIsHovered(true);
+                button.repaint();
+            }
 
-        closeButton.addActionListener(e -> runnable.run());
-        return closeButton;
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setIsHovered(false);
+                button.repaint();
+            }
+        });
+        return button;
+    }
+
+    private BufferedImage buildBufferedImage(String relativeFilePath) {
+        InputStream is = null;
+        try {
+            is = getClass().getResourceAsStream(relativeFilePath);
+            if (is != null) {
+                return ImageIO.read(is);
+            } else {
+                System.err.println("File not found: " + relativeFilePath);
+                return null;
+            }
+        } catch (IOException e) {
+            System.err.println("Unable to load image: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
 

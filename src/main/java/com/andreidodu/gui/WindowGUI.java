@@ -24,7 +24,7 @@ public class WindowGUI extends JFrame {
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
 
-        setOpacity(0.7f);
+        setOpacity(0.8f);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 360.0, 360));
 
         RoundButton closeButton = prepareCloseButton(circleObserver::exit, " X");

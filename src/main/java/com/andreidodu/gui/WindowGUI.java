@@ -49,9 +49,9 @@ public class WindowGUI extends JFrame {
 
         CirclePanel circlePanel = new CirclePanel();
         this.circle = circlePanel;
-        circlePanel.setBounds(0, 40, 300, 260);
+        circlePanel.setBounds(0, 40, getWidth(), getHeight());
         add(circlePanel);
-        setVisible(true);
+
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem1 = new JMenuItem("About");
         JMenuItem menuItem2 = new JMenuItem("Exit");
@@ -71,6 +71,13 @@ public class WindowGUI extends JFrame {
                     initialClick = e.getPoint();
                 } else {
                     initialClick = null;
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    showPopup(e);
                 }
             }
 
@@ -117,7 +124,7 @@ public class WindowGUI extends JFrame {
             }
         });
 
-
+        setVisible(true);
     }
 
 

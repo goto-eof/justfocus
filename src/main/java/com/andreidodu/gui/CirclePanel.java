@@ -61,7 +61,6 @@ public class CirclePanel extends JPanel {
             }
             g2d.fillOval(x, y, diameter, diameter);
 
-            // g2d.setStroke(new BasicStroke(thickness));
             g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10f, null, 0));
 
 

@@ -23,7 +23,6 @@ public class WindowGUI extends JFrame {
     public WindowGUI(CircleObserver circleObserver) {
         this.circleObserver = circleObserver;
         setUndecorated(true);
-        setBackground(new Color(0, 0, 0, 0));
         setSize(160, 160);
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);

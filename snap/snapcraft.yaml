@@ -18,6 +18,7 @@ apps:
     plugs:
       - desktop
       - wayland
+      - opengl
 platforms:
   amd64:
     build-on: [ amd64 ]
@@ -77,3 +78,7 @@ parts:
       
       cp target/just-focus.jar "$SNAPCRAFT_PART_INSTALL"/jar/just-focus.jar
       cp -r custom-jre "$SNAPCRAFT_PART_INSTALL"/
+    stage-packages:
+      - libglu1-mesa
+      - libgl1-mesa-glx
+      - libxrender1

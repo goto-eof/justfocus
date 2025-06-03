@@ -3,7 +3,7 @@ version: '3.0.0'
 summary: A distraction-free focus timer.
 description: |
   A distraction-free focus timer
-grade: edge
+grade: stable
 confinement: strict
 base: core24
 icon: snap/gui/icon.png

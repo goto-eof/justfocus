@@ -1,9 +1,9 @@
 name: justfocus
-version: '2.5.0'
+version: '3.0.0'
 summary: A distraction-free focus timer.
 description: |
   A distraction-free focus timer
-grade: stable
+grade: edge
 confinement: strict
 base: core24
 icon: snap/gui/icon.png

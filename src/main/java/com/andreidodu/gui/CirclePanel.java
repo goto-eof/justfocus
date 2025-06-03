@@ -6,10 +6,10 @@ import java.awt.*;
 public class CirclePanel extends JPanel {
 
     private int arcAngle;
-    private String timeString = "00:00";
+    private String timeString = "00:00:00";
     private final int diameter = 160;
     private final float thickness = 24f;
-    private final int FONT_SIZE = 20;
+    private final int FONT_SIZE = 16;
     private boolean baseColorFlag = true;
 
 

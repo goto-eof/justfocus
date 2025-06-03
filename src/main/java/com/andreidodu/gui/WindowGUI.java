@@ -62,7 +62,7 @@ public class WindowGUI extends JFrame {
                 if (SwingUtilities.isRightMouseButton(e)) {
                     showPopup(e);
                 }
-                if (SwingUtilities.isLeftMouseButton(e) && circlePanel.isOnBorder(e.getPoint())) {
+                if (SwingUtilities.isLeftMouseButton(e) && circlePanel.isOnPanel(e.getPoint())) {
                     initialClick = e.getPoint();
                 } else {
                     initialClick = null;

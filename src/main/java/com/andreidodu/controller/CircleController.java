@@ -51,7 +51,10 @@ public class CircleController implements CircleObserver {
             String remainingTimeString = millisToHHMMSS(remainingTime);
 
             if (remainingTime > 0) {
-                currentArcValue.set(currentArcValue.get() - calculateOnePerc());
+                double onePerc = calculateOnePerc();
+                double angle = currentArcValue.get() - onePerc;
+                System.out.println("angle = " + angle + " | onePerc = " + onePerc);
+                currentArcValue.set(angle);
             }
             SwingUtilities.invokeLater(() -> {
                 window.getCircle().setArcAngle(currentArcValue.get().intValue());

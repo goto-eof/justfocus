@@ -1,4 +1,8 @@
-# Just Focus
+- [Introduction](#introduction)
+- [Download](#download)
+
+
+<h1 id="introduction">Just Focus</h1>
 
 ### A Distraction-Free Focus Timer for Linux Desktops
 
@@ -17,7 +21,7 @@ without unnecessary distractions.
 
 ----
 
-# Download
+<h1 id="download">Download</h1>
 
 ### Windows installation
 

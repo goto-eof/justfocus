@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.andreidodu.util.TimeUtil.millisToHHMMSS;
+import static com.andreidodu.util.TimeUtil.millisToHHMMSSString;
 
 public class CircleController implements CircleObserver {
 
@@ -48,7 +48,7 @@ public class CircleController implements CircleObserver {
 
             long remainingTime = currentTime.get();
             currentTime.set(currentTime.get() - 1000);
-            String remainingTimeString = millisToHHMMSS(remainingTime);
+            String remainingTimeString = millisToHHMMSSString(remainingTime);
 
             if (remainingTime > 0) {
                 double onePerc = calculateOnePerc();
@@ -125,7 +125,7 @@ public class CircleController implements CircleObserver {
         this.runningFlag.set(true);
         this.currentArcValue.set(0.0);
         waitTime.set(3);
-        String remainingTimeString = millisToHHMMSS(maxTime);
+        String remainingTimeString = millisToHHMMSSString(maxTime);
         SwingUtilities.invokeLater(() -> {
             window.getCircle().setArcAngle(0);
             window.getCircle().setBaseColorFlag(true);

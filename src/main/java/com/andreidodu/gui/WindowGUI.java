@@ -42,11 +42,6 @@ public class WindowGUI extends JFrame {
         downButton.setBounds(15, getHeight() / 2 - 10, 20, 20);
         add(downButton);
 
-
-//        RoundButton aboutButton = prepareButton("about.png", this::showAbout, " ?");
-//        aboutButton.setBounds(getWidth() / 2 - (20 / 2), 15, 20, 20);
-//        add(aboutButton);
-
         CirclePanel circlePanel = new CirclePanel();
         this.circle = circlePanel;
         circlePanel.setBounds(0, 40, getWidth(), getHeight());

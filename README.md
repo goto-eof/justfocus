@@ -38,7 +38,7 @@ sudo snap install justfocus
 
 ### Linux Installation (dpkg)
 
-For now, it is possible to install Just Focus by downloading the
+It is possible to install Just Focus by downloading the
 `.deb` [package](https://github.com/goto-eof/justfocus/releases/download/2.5.0/just-focus_2.5.0_amd64.deb) and by
 installing it:
 

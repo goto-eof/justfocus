@@ -88,8 +88,14 @@ public class CirclePanel extends JPanel {
             g2d.fillOval(innerX, innerY, innerDiameter, innerDiameter);
 
             g2d.setStroke(new BasicStroke(2f));
-            g2d.setColor(new Color(255, 255, 255, 255));
+            g2d.setColor(new Color(101, 255, 137, 255));
             g2d.drawOval(innerX, innerY, innerDiameter, innerDiameter);
+
+
+            g2d.setStroke(new BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, new float[]{5f, 45f}, 1));
+            g2d.setColor(new Color(0, 0, 0, 255));
+            g2d.drawOval(innerX, innerY, innerDiameter, innerDiameter);
+
 
             g2d.setFont(new Font("Arial", Font.BOLD, FONT_SIZE));
             FontMetrics fm = g2d.getFontMetrics();
@@ -99,7 +105,7 @@ public class CirclePanel extends JPanel {
             int centerX = getWidth() / 2 - textWidth / 2;
             int centerY = getHeight() / 2 + textHeight / 4;
 
-            g2d.setColor(Color.WHITE);
+            g2d.setColor(new Color(101, 255, 137, 255));
             g2d.drawString(getTimeString(), centerX, centerY);
         } finally {
             g2d.dispose();

@@ -80,5 +80,4 @@ parts:
       cp -r custom-jre "$SNAPCRAFT_PART_INSTALL"/
     stage-packages:
       - libglu1-mesa
-      - libgl1-mesa-glx
       - libxrender1

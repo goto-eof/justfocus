@@ -125,7 +125,7 @@ jpackage ^
 --main-class "com.andreidodu.Main" ^
 --dest "." ^
 --add-modules java.base,java.desktop ^
---java-options "-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true" ^
+--java-options "-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true -Djdk.gtk.version=3" ^
 --verbose ^
 --win-shortcut ^
 --win-menu

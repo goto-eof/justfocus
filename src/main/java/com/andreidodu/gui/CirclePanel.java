@@ -62,7 +62,7 @@ public class CirclePanel extends JPanel {
             g2d.fillOval(x, y, diameter, diameter);
 
             g2d.setStroke(new BasicStroke(thickness));
-            g2d.setColor(new Color(229, 147, 59, 255));
+            g2d.setColor(new Color(69, 68, 68, 255));
             g2d.drawOval(x, y, diameter, diameter);
 
 

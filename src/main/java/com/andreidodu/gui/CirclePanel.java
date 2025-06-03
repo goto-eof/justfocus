@@ -55,7 +55,7 @@ public class CirclePanel extends JPanel {
 
             if (baseColorFlag) {
                 g2d.setColor(new Color(0, 0, 0, 255));
-            }else {
+            } else {
                 g2d.setColor(new Color(103, 3, 3, 255));
 
             }
@@ -73,6 +73,11 @@ public class CirclePanel extends JPanel {
             }
             int startAngle = 90;
             g2d.drawArc(x, y, diameter, diameter, startAngle, arcAngle);
+
+
+            g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, new float[]{10f, 5f}, 1));
+            g2d.setColor(new Color(0, 0, 0, 255));
+            g2d.drawOval(x, y, diameter, diameter);
 
 
             int innerDiameter = 80;

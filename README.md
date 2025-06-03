@@ -107,7 +107,7 @@ jpackage \
 --dest "." \
 --add-modules java.base,java.desktop \
 --linux-shortcut \
---java-options "-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true" \
+--java-options "-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true -Djdk.gtk.version=3" \
 --verbose
 ```
 
@@ -125,7 +125,7 @@ jpackage ^
 --main-class "com.andreidodu.Main" ^
 --dest "." ^
 --add-modules java.base,java.desktop ^
---java-options "-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true -Djdk.gtk.version=3" ^
+--java-options "-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true" ^
 --verbose ^
 --win-shortcut ^
 --win-menu

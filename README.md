@@ -1,4 +1,8 @@
-# Just Focus
+- [Introduction](#introduction)
+- [Download](#download)
+
+
+<h1 id="introduction">Just Focus</h1>
 
 ### A Distraction-Free Focus Timer for Linux Desktops
 
@@ -17,7 +21,7 @@ without unnecessary distractions.
 
 ----
 
-# Download
+<h1 id="download">Download</h1>
 
 ### Windows installation
 
@@ -34,7 +38,7 @@ sudo snap install justfocus
 
 ### Linux Installation (dpkg)
 
-For now, it is possible to install Just Focus by downloading the
+It is possible to install Just Focus by downloading the
 `.deb` [package](https://github.com/goto-eof/justfocus/releases/download/2.5.0/just-focus_2.5.0_amd64.deb) and by
 installing it:
 

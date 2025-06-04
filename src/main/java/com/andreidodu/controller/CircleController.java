@@ -6,6 +6,7 @@ import com.andreidodu.gui.themes.RadixTheme;
 import com.andreidodu.gui.themes.StrokeTheme;
 import com.andreidodu.gui.themes.Theme;
 import com.andreidodu.observer.CircleObserver;
+import com.andreidodu.service.SettingsService;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class CircleController implements CircleObserver {
     private AtomicBoolean runningFlag = new AtomicBoolean(true);
     private int themeIndex = 0;
 
+    private final SettingsService settingsService = new SettingsService();
+
     private final List<Theme> themeList = new ArrayList<>();
 
 
@@ -45,6 +48,8 @@ public class CircleController implements CircleObserver {
         this.themeList.add(new ClassicTheme());
         this.themeList.add(new StrokeTheme());
         this.themeList.add(new RadixTheme());
+
+        window.onThemeChange(themeList.get(settingsService.loadThemeId()));
 
         futureHolder = executorService.scheduleWithFixedDelay(() -> {
             if (!runningFlag.get()) {
@@ -187,6 +192,7 @@ public class CircleController implements CircleObserver {
             themeIndex = 0;
         }
         window.onThemeChange(themeList.get(themeIndex));
+        settingsService.saveThemeId(themeIndex);
         themeIndex++;
     }
 

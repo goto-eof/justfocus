@@ -1,5 +1,6 @@
 package com.andreidodu.gui;
 
+import com.andreidodu.gui.themes.Theme;
 import com.andreidodu.observer.CircleObserver;
 
 import javax.imageio.ImageIO;
@@ -11,10 +12,15 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class WindowGUI extends JFrame {
+public class WindowGUI extends JFrame implements ThemeChangerListener {
     private CirclePanel circle;
     private final CircleObserver circleObserver;
     private Point initialClick;
+    private JButton upButton;
+    private JButton downButton;
+    private JButton closeButton;
+    private JButton switchButton;
+
 
     public CirclePanel getCircle() {
         return circle;
@@ -27,24 +33,28 @@ public class WindowGUI extends JFrame {
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
 
-        setOpacity(0.8f);
+        setOpacity(0.7f);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 360.0, 360));
 
-        RoundButton closeButton = prepareButton("close.png", circleObserver::exit);
+        closeButton = prepareButton("close.png", circleObserver::exit);
         closeButton.setBounds(getWidth() / 2 - (20 / 2), getHeight() - 35, 20, 20);
         add(closeButton);
-
-
-        RoundButton upButton = prepareButton("up.png", circleObserver::increaseTimer);
+        upButton = prepareButton("up.png", circleObserver::increaseTimer);
         upButton.setBounds(getWidth() - 35, getHeight() / 2 - 10, 20, 20);
         add(upButton);
-        RoundButton downButton = prepareButton("down.png", circleObserver::decreaseTimer);
+        downButton = prepareButton("down.png", circleObserver::decreaseTimer);
         downButton.setBounds(15, getHeight() / 2 - 10, 20, 20);
         add(downButton);
+        switchButton = prepareButton("switch.png", circleObserver::switchTheme);
+        switchButton.setBounds(getWidth() / 2 - 10, 15, 20, 20);
+        add(switchButton);
+
+        showHideButtons(false);
+
 
         CirclePanel circlePanel = new CirclePanel();
         this.circle = circlePanel;
-        circlePanel.setBounds(0, 40, getWidth(), getHeight());
+        circlePanel.setBounds(0, 0, getWidth(), getHeight());
         add(circlePanel);
 
         JPopupMenu popupMenu = new JPopupMenu();
@@ -79,6 +89,22 @@ public class WindowGUI extends JFrame {
             private void showPopup(MouseEvent e) {
                 if (e.isPopupTrigger()) {
                     popupMenu.show(e.getComponent(), e.getX(), e.getY());
+                }
+            }
+        });
+
+        this.circle.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                showHideButtons(true);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                Point mousePos = e.getPoint();
+                double distance = calculateDistance(getWidth() / 2, getHeight() / 2, mousePos.x, mousePos.y);
+                if (distance > 70) {
+                    showHideButtons(false);
                 }
             }
         });
@@ -122,6 +148,13 @@ public class WindowGUI extends JFrame {
         setVisible(true);
     }
 
+    private void showHideButtons(boolean aFlag) {
+        upButton.setVisible(aFlag);
+        downButton.setVisible(aFlag);
+        closeButton.setVisible(aFlag);
+        switchButton.setVisible(aFlag);
+    }
+
 
     private void showAbout() {
         JOptionPane.showMessageDialog(this, "<html>Just Focus<br/>Version: 3.0.0<br/>Developer: Andrei Dodu<br/>Project webpage: https://github.com/goto-eof/justfocus<br/>License; CC BY-NC-SA 4.0</html>", "About", JOptionPane.INFORMATION_MESSAGE);
@@ -144,6 +177,12 @@ public class WindowGUI extends JFrame {
             }
         });
         return button;
+    }
+
+    private double calculateDistance(int x1, int y1, int x2, int y2) {
+        double deltaX = x2 - x1;
+        double deltaY = y2 - y1;
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     }
 
     private BufferedImage buildBufferedImage(String relativeFilePath) {
@@ -173,4 +212,8 @@ public class WindowGUI extends JFrame {
     }
 
 
+    @Override
+    public void onThemeChange(Theme theme) {
+        this.circle.onThemeChange(theme);
+    }
 }

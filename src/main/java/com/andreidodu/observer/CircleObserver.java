@@ -8,4 +8,6 @@ public interface CircleObserver {
     void decreaseTimer();
 
     void exit();
+
+    void switchTheme();
 }

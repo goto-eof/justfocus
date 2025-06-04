@@ -1,9 +1,15 @@
 package com.andreidodu.controller;
 
 import com.andreidodu.gui.WindowGUI;
+import com.andreidodu.gui.themes.ClassicTheme;
+import com.andreidodu.gui.themes.RadixTheme;
+import com.andreidodu.gui.themes.StrokeTheme;
+import com.andreidodu.gui.themes.Theme;
 import com.andreidodu.observer.CircleObserver;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -23,6 +29,9 @@ public class CircleController implements CircleObserver {
     private AtomicReference<Double> currentArcValue = new AtomicReference<>(0.0);
     private AtomicReference<Integer> waitTime = new AtomicReference<>(0);
     private AtomicBoolean runningFlag = new AtomicBoolean(true);
+    private int themeIndex = 0;
+
+    private final List<Theme> themeList = new ArrayList<>();
 
 
     private final static int DEFAULT_INTERVAL = 15 * 60 * 1000;
@@ -32,6 +41,11 @@ public class CircleController implements CircleObserver {
 
     public CircleController() {
         window = new WindowGUI(this);
+
+        this.themeList.add(new ClassicTheme());
+        this.themeList.add(new StrokeTheme());
+        this.themeList.add(new RadixTheme());
+
         futureHolder = executorService.scheduleWithFixedDelay(() -> {
             if (!runningFlag.get()) {
                 SwingUtilities.invokeLater(() -> {
@@ -165,6 +179,15 @@ public class CircleController implements CircleObserver {
     @Override
     public void exit() {
         System.exit(0);
+    }
+
+    @Override
+    public void switchTheme() {
+        if (themeIndex < 0 || themeList.size() <= themeIndex) {
+            themeIndex = 0;
+        }
+        window.onThemeChange(themeList.get(themeIndex));
+        themeIndex++;
     }
 
     public double calculateOnePerc() {

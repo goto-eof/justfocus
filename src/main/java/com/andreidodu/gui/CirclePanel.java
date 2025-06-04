@@ -1,9 +1,18 @@
 package com.andreidodu.gui;
 
+import com.andreidodu.gui.themes.Theme;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class CirclePanel extends JPanel {
+public class CirclePanel extends JPanel implements ThemeChangerListener {
+
+    public Color primaryStrokeColor = new Color(0, 0, 0, 255);
+    public float[] primaryStrokeProps = {6f, 6f};
+    public float primaryStrokeWidth = 24f;
+    private Color baseColor = new Color(101, 255, 137, 255);
+    private Color timeEndedColor = new Color(255, 101, 101, 255);
+    private boolean isShowStrokeOnTop = false;
 
     private int arcAngle;
     private String timeString = "00:00:00";
@@ -33,10 +42,6 @@ public class CirclePanel extends JPanel {
         this.baseColorFlag = baseColorFlag;
     }
 
-    public int getArcAngle() {
-        return arcAngle;
-    }
-
     public void setArcAngle(int arcAngle) {
         this.arcAngle = arcAngle;
     }
@@ -54,7 +59,7 @@ public class CirclePanel extends JPanel {
             int y = (getHeight() - diameter) / 2;
 
             if (baseColorFlag) {
-                g2d.setColor(new Color(0, 0, 0, 255));
+                g2d.setColor(new Color(58, 58, 58, 255));
             } else {
                 g2d.setColor(new Color(103, 3, 3, 255));
 
@@ -69,13 +74,18 @@ public class CirclePanel extends JPanel {
 
 
             if (baseColorFlag) {
-                g2d.setColor(new Color(101, 255, 137, 255));
+                g2d.setColor(baseColor);
             } else {
-                g2d.setColor(new Color(255, 101, 101, 255));
+                g2d.setColor(timeEndedColor);
             }
             int startAngle = 90;
             g2d.drawArc(x, y, diameter, diameter, startAngle, arcAngle);
 
+            if (isShowStrokeOnTop) {
+                g2d.setStroke(new BasicStroke(primaryStrokeWidth, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, primaryStrokeProps, 1));
+                g2d.setColor(primaryStrokeColor);
+                g2d.drawOval(x, y, diameter, diameter);
+            }
 
             int innerDiameter = 80;
             int innerX = (getWidth() - innerDiameter) / 2;
@@ -85,12 +95,12 @@ public class CirclePanel extends JPanel {
             g2d.fillOval(innerX, innerY, innerDiameter, innerDiameter);
 
             g2d.setStroke(new BasicStroke(2f));
-            g2d.setColor(new Color(101, 255, 137, 255));
+            g2d.setColor(baseColor);
             g2d.drawOval(innerX, innerY, innerDiameter, innerDiameter);
 
 
             g2d.setStroke(new BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1f, new float[]{5f, 45f}, 1));
-            g2d.setColor(new Color(0, 0, 0, 255));
+            g2d.setColor(primaryStrokeColor);
             g2d.drawOval(innerX, innerY, innerDiameter, innerDiameter);
 
 
@@ -102,11 +112,24 @@ public class CirclePanel extends JPanel {
             int centerX = getWidth() / 2 - textWidth / 2;
             int centerY = getHeight() / 2 + textHeight / 4;
 
-            g2d.setColor(new Color(101, 255, 137, 255));
+            g2d.setColor(baseColor);
             g2d.drawString(getTimeString(), centerX, centerY);
         } finally {
             g2d.dispose();
         }
+    }
+
+    @Override
+    public void onThemeChange(Theme theme) {
+        this.baseColor = theme.getBaseColor();
+        this.timeEndedColor = theme.getTimeEndedColor();
+        this.isShowStrokeOnTop = theme.isShowStrokeOnTop();
+        if (theme.isShowStrokeOnTop()) {
+            this.primaryStrokeProps = theme.getPrimaryStrokeProps();
+            this.primaryStrokeWidth = theme.getPrimaryStrokeWidth();
+            this.primaryStrokeColor = theme.getPrimaryStrokeColor();
+        }
+        repaint();
     }
 
     public boolean isOnPanel(Point p) {
@@ -121,4 +144,5 @@ public class CirclePanel extends JPanel {
 
         return distance <= outerRadius;
     }
+
 }

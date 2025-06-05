@@ -3,9 +3,15 @@ package com.andreidodu.gui.themes;
 import java.awt.*;
 
 public class RadixTheme implements Theme {
+    private Color baseColor;
+
+    public RadixTheme(Color baseColor) {
+        this.baseColor = baseColor;
+    }
+
     @Override
     public Color getBaseColor() {
-        return new Color(101, 255, 137, 255);
+        return baseColor;
     }
 
     @Override

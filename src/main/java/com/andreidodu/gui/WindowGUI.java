@@ -208,7 +208,6 @@ public class WindowGUI extends JFrame implements ThemeChangerListener {
                 }
             }
         }
-
     }
 
 

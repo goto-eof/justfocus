@@ -19,6 +19,7 @@ apps:
       - desktop
       - wayland
       - opengl
+      - home
 platforms:
   amd64:
     build-on: [ amd64 ]

@@ -1,7 +1,6 @@
 - [Introduction](#introduction)
 - [Download](#download)
 
-
 <h1 id="introduction">Just Focus</h1>
 
 ### A Distraction-Free Focus Timer for Linux Desktops
@@ -26,7 +25,7 @@ without unnecessary distractions.
 ### Windows installation
 
 Download and install the
-following [executable file](https://github.com/goto-eof/justfocus/releases/download/2.5.0/Just.Focus-2.5.0.exe).
+following [executable file](https://github.com/goto-eof/justfocus/releases/download/3.0.0/Just.Focus-3.0.0.exe).
 
 ### Linux Installation (Snap)
 

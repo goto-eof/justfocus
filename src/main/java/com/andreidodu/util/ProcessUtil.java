@@ -6,27 +6,63 @@ import java.io.InputStreamReader;
 
 
 public class ProcessUtil {
+
+    private static final boolean isGnomeDesktop = System.getProperty("os.name").equalsIgnoreCase("linux") && isGnomeInstalled();
+
     public static void enableFocusMode(boolean isEnabled) {
+        if (!isGnomeDesktop) {
+            return;
+        }
+
         try {
             System.out.println("Focus mode: " + isEnabled);
             ProcessBuilder pb = new ProcessBuilder("gsettings", "set", "org.gnome.desktop.notifications", "show-banners", !isEnabled ? "true" : "false");
+            pb.redirectErrorStream(true);
+
             Process p = pb.start();
             System.out.println("Executing....");
+
+            StringBuilder resultString = new StringBuilder();
+
+            String line;
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));) {
+                while ((line = reader.readLine()) != null) {
+                    resultString.append(line);
+                }
+            }
+
             int exitCode = p.waitFor();
             System.out.println("ExitCode: " + exitCode);
+
+
             if (exitCode == 0) {
-                System.out.println("enableFocusMode executed successfully");
-            } else {
-                BufferedReader errorReader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-                StringBuilder errorOutput = new StringBuilder();
-                String line;
-                while ((line = errorReader.readLine()) != null) {
-                    errorOutput.append(line).append("\n");
-                }
-                System.err.println("Unable to enableFocusMode (Codice: " + exitCode + "): " + errorOutput.toString().trim());
+                System.out.println("enableFocusMode executed successfully: " + resultString);
+                return;
             }
+
+            System.err.println("Unable to enableFocusMode (Codice: " + exitCode + "): " + resultString);
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            System.err.println("Unable to enableFocusMode (Code: " + e.getMessage());
         }
     }
+
+    private static boolean isGnomeInstalled() {
+        try {
+
+            ProcessBuilder pb = new ProcessBuilder("gsettings", "list-schemas");
+            pb.redirectErrorStream(true);
+
+            Process p = pb.start();
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));) {
+                while (reader.readLine() != null) { /*do nothing, we are just consuming the stream to preved process deadlock*/ }
+            }
+            int exitCode = p.waitFor();
+            return exitCode == 0;
+        } catch (IOException | InterruptedException e) {
+            return false;
+        }
+    }
+
 }

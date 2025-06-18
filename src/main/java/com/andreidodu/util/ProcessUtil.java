@@ -7,13 +7,24 @@ import java.io.InputStreamReader;
 
 public class ProcessUtil {
 
-    private static final boolean isGnomeDesktop = System.getProperty("os.name").equalsIgnoreCase("linux") && isGnomeInstalled();
+    private static final boolean IS_GNOME_DESKTOP = System.getProperty("os.name").equalsIgnoreCase("linux") && isGnomeInstalled();
+    private static final boolean IS_WINDOWS = System.getProperty("os.name").equalsIgnoreCase("windows");
+
 
     public static void enableFocusMode(boolean isEnabled) {
-        if (!isGnomeDesktop) {
+
+        if (IS_GNOME_DESKTOP) {
+            enableLinuxGnomeFocusMode(isEnabled);
             return;
         }
 
+        if (IS_WINDOWS) {
+            // TODO
+        }
+
+    }
+
+    public static void enableLinuxGnomeFocusMode(boolean isEnabled) {
         try {
             System.out.println("Focus mode: " + isEnabled);
             ProcessBuilder pb = new ProcessBuilder("gsettings", "set", "org.gnome.desktop.notifications", "show-banners", !isEnabled ? "true" : "false");
@@ -49,7 +60,6 @@ public class ProcessUtil {
 
     private static boolean isGnomeInstalled() {
         try {
-
             ProcessBuilder pb = new ProcessBuilder("gsettings", "list-schemas");
             pb.redirectErrorStream(true);
 

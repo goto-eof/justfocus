@@ -7,6 +7,7 @@ import com.andreidodu.gui.themes.StrokeTheme;
 import com.andreidodu.gui.themes.Theme;
 import com.andreidodu.observer.CircleObserver;
 import com.andreidodu.service.SettingsService;
+import com.andreidodu.util.ProcessUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +44,7 @@ public class CircleController implements CircleObserver {
     private final SettingsService settingsService = new SettingsService();
 
     private final List<Theme> themeList = new ArrayList<>();
-
+    private boolean isFocusModeEnabled;
 
     private final static int DEFAULT_INTERVAL = 15 * 60 * 1000;
     private final static int SHORT_INTERVAL = 5 * 60 * 1000;
@@ -91,6 +92,11 @@ public class CircleController implements CircleObserver {
                 return;
             }
 
+            if (!isFocusModeEnabled) {
+                ProcessUtil.enableFocusMode(true);
+                this.isFocusModeEnabled = true;
+            }
+
             long remainingTime = currentTime.get();
             currentTime.set(currentTime.get() - 1000);
             String remainingTimeString = millisToHHMMSSString(remainingTime);
@@ -116,6 +122,12 @@ public class CircleController implements CircleObserver {
 
     @Override
     public void releaseResources() {
+        if (this.isFocusModeEnabled) {
+            ProcessUtil.enableFocusMode(false);
+            this.isFocusModeEnabled = false;
+        }
+        this.isFocusModeEnabled = false;
+
         if (futureHolder != null) {
             futureHolder.cancel(true);
         }
@@ -187,6 +199,10 @@ public class CircleController implements CircleObserver {
 
         if (timeCounter - k <= 0) {
             updateTimer(k);
+            if (this.isFocusModeEnabled) {
+                ProcessUtil.enableFocusMode(false);
+                this.isFocusModeEnabled = false;
+            }
             return;
         }
 
@@ -209,6 +225,7 @@ public class CircleController implements CircleObserver {
 
     @Override
     public void exit() {
+        releaseResources();
         System.exit(0);
     }
 

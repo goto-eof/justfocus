@@ -64,7 +64,10 @@ public class WindowGUI extends JFrame implements ThemeChangerListener {
         popupMenu.add(menuItem2);
 
         menuItem1.addActionListener(e -> showAbout());
-        menuItem2.addActionListener(e -> System.exit(0));
+        menuItem2.addActionListener(e -> {
+            circleObserver.releaseResources();
+            System.exit(0);
+        });
 
         circlePanel.addMouseListener(new MouseAdapter() {
             @Override

@@ -20,6 +20,7 @@ apps:
       - wayland
       - opengl
       - home
+      - gsettings
 platforms:
   amd64:
     build-on: [ amd64 ]

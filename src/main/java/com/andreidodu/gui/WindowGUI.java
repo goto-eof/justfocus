@@ -160,7 +160,7 @@ public class WindowGUI extends JFrame implements ThemeChangerListener {
 
 
     private void showAbout() {
-        JOptionPane.showMessageDialog(this, "<html>Just Focus<br/>Version: 3.0.0<br/>Developer: Andrei Dodu<br/>Project webpage: https://github.com/goto-eof/justfocus<br/>License; CC BY-NC-SA 4.0</html>", "About", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "<html>Just Focus<br/>Version: 3.1.0<br/>Developer: Andrei Dodu<br/>Project webpage: https://github.com/goto-eof/justfocus<br/>License; CC BY-NC-SA 4.0</html>", "About", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private RoundButton prepareButton(String imageFile, Runnable runnable) {

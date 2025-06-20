@@ -16,9 +16,9 @@ public class WindowsStrategy implements Strategy {
 
     @Override
     public void execute(boolean isEnabled) {
-        String value = isEnabled ? "0" : "1";
+        String value = isEnabled ? "1" : "0";
         // Reg key valid for Windows 10 and 11 -> TODO try to understand how to manage other Windows versions
-        String[] command = {"cmd.exe", "/c", "reg", "add", "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings", "/v", "NOC_GLOBAL_SETTING_TOASTS_ENABLED", "/t", "REG_DWORD", "/d", value, "/f"};
+        String[] command = {"cmd.exe", "/c", "reg", "add", "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Notifications\\Settings", "/v", "Windows.ActionCenter.SmartOptOut", "/t", "REG_DWORD", "/d", value, "/f"};
 
         try {
             ProcessBuilder pb = new ProcessBuilder(command);

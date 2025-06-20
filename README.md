@@ -102,7 +102,7 @@ jpackage \
 --type deb \
 --name "Just Focus" \
 --vendor "Andrei Dodu" \
---app-version "3.1.0" \
+--app-version "3.0.0" \
 --input "target" \
 --main-jar "just-focus.jar" \
 --icon "icon.png" \
@@ -121,7 +121,7 @@ jpackage ^
 --type exe ^
 --name "Just Focus" ^
 --vendor "Andrei Dodu" ^
---app-version "3.1.0" ^
+--app-version "3.0.0" ^
 --input "target" ^
 --main-jar "just-focus.jar" ^
 --icon "icon.ico" ^

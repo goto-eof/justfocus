@@ -25,6 +25,7 @@ import static com.andreidodu.util.TimeUtil.millisToHHMMSSString;
 
 public class CircleController implements CircleObserver {
 
+    public static final Color COLOR_GRAY = new Color(152, 151, 143, 255);
     public static final Color COLOR_GREEN = new Color(101, 255, 137, 255);
     public static final Color COLOR_ORANGE = new Color(237, 132, 26, 255);
     public static final Color COLOR_YELLOW = new Color(255, 224, 101, 255);
@@ -32,6 +33,8 @@ public class CircleController implements CircleObserver {
     public static final Color COLOR_PURPLE = new Color(129, 101, 255, 255);
     public static final Color COLOR_PINK = new Color(227, 101, 255, 255);
     public static final Color COLOR_AQUA = new Color(101, 255, 255, 255);
+
+
     private ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     private AtomicReference<Long> maxTime = new AtomicReference<>((long) 1000 * 30 * 60);
     private AtomicLong currentTime = new AtomicLong(maxTime.get());
@@ -54,6 +57,7 @@ public class CircleController implements CircleObserver {
     public CircleController() {
         window = new WindowGUI(this);
 
+        this.themeList.add(new ClassicTheme(COLOR_GRAY));
         this.themeList.add(new ClassicTheme(COLOR_GREEN));
         this.themeList.add(new ClassicTheme(COLOR_ORANGE));
         this.themeList.add(new ClassicTheme(COLOR_YELLOW));
@@ -61,6 +65,7 @@ public class CircleController implements CircleObserver {
         this.themeList.add(new ClassicTheme(COLOR_PURPLE));
         this.themeList.add(new ClassicTheme(COLOR_PINK));
         this.themeList.add(new ClassicTheme(COLOR_AQUA));
+        this.themeList.add(new StrokeTheme(COLOR_GRAY));
         this.themeList.add(new StrokeTheme(COLOR_GREEN));
         this.themeList.add(new StrokeTheme(COLOR_ORANGE));
         this.themeList.add(new StrokeTheme(COLOR_YELLOW));
@@ -68,6 +73,7 @@ public class CircleController implements CircleObserver {
         this.themeList.add(new StrokeTheme(COLOR_PURPLE));
         this.themeList.add(new StrokeTheme(COLOR_PINK));
         this.themeList.add(new StrokeTheme(COLOR_AQUA));
+        this.themeList.add(new RadixTheme(COLOR_GRAY));
         this.themeList.add(new RadixTheme(COLOR_GREEN));
         this.themeList.add(new RadixTheme(COLOR_ORANGE));
         this.themeList.add(new RadixTheme(COLOR_YELLOW));

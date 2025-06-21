@@ -119,6 +119,7 @@ public class CircleController implements CircleObserver {
             });
 
             if (remainingTime <= 0) {
+                ProcessUtil.enableFocusMode(false);
                 runningFlag.set(false);
             }
 

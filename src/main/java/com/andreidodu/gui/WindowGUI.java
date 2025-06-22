@@ -32,8 +32,11 @@ public class WindowGUI extends JFrame implements ThemeChangerListener {
         setSize(160, 160);
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
-
-        setOpacity(0.7f);
+        try {
+            setOpacity(0.7f);
+        } catch (Exception e) {
+            System.out.println("Unable to set opacity: " + e.getMessage());
+        }
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 360.0, 360));
 
         closeButton = prepareButton("close.png", circleObserver::exit);

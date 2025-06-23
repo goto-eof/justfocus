@@ -11,6 +11,7 @@ without unnecessary distractions.
 
 **Key Features:**
 
+* **auto-enables/disables the `Do Not Disturb`** functionality on Gnome desktops
 * **Minimalist Design:** A clean, undecorated circular UI that blends seamlessly with your desktop environment.
 * **Visual Progress Indicator:** A smooth, animated arc visually represents the time remaining in your focus session,
   offering intuitive feedback at a glance.
@@ -25,7 +26,7 @@ without unnecessary distractions.
 ### Windows installation
 
 Download and install the
-following [executable file](https://github.com/goto-eof/justfocus/releases/download/3.0.0/Just.Focus-3.0.0.exe).
+following [executable file](https://github.com/goto-eof/justfocus/releases/download/3.1.0/Just.Focus-3.1.0.exe).
 
 ### Linux Installation (Snap)
 
@@ -38,7 +39,7 @@ sudo snap install justfocus
 ### Linux Installation (dpkg)
 
 It is possible to install Just Focus by downloading the
-`.deb` [package](https://github.com/goto-eof/justfocus/releases/download/2.5.0/just-focus_2.5.0_amd64.deb) and by
+`.deb` [package](https://github.com/goto-eof/justfocus/releases/download/3.1.0/just-focus_3.1.0_amd64.deb) and by
 installing it:
 
 ```bash
@@ -102,7 +103,7 @@ jpackage \
 --type deb \
 --name "Just Focus" \
 --vendor "Andrei Dodu" \
---app-version "3.0.0" \
+--app-version "3.1.0" \
 --input "target" \
 --main-jar "just-focus.jar" \
 --icon "icon.png" \
@@ -121,7 +122,7 @@ jpackage ^
 --type exe ^
 --name "Just Focus" ^
 --vendor "Andrei Dodu" ^
---app-version "3.0.0" ^
+--app-version "3.1.0" ^
 --input "target" ^
 --main-jar "just-focus.jar" ^
 --icon "icon.ico" ^
@@ -135,3 +136,11 @@ jpackage ^
 ```
 
 <img src="https://andre-i.eu/api/v1/ipResource/custom.png?host=https://github.com/goto-eof/justfocus" onerror="this.style.display='none'" />
+
+# Moreover...
+
+Tested on Ubuntu 25.04, built on Debian 10 (`.deb` package). Because this project was conceived for Ubuntu, so for GNOME
+desktop environment, the application is fully compatible with Ubuntu. In particular the enable/disable "Do Not Disturb"
+feature is available only on GNOME desktop. The same feature is not available on Windows there are important changes
+between Windows 10 and Windows 11 (in the future perhaps I will use the Windows API to enable/disable the "Do Not
+Disturb" feature from JustFocus).

@@ -161,5 +161,5 @@ jpackage \
 
 Tested on Ubuntu 25.04, built on Debian 10 (`.deb` package). Because this project was conceived for Ubuntu, so for GNOME
 desktop environment, the application is fully compatible with Ubuntu. In particular the enable/disable "Do Not Disturb"
-feature is available only on GNOME desktop. The same feature is not available on Windows because there are important
+feature is available only on Ubuntu. The same feature is not available on Windows because there are important
 changes between Windows 10 and Windows 11 and frankly, I need more time in order to learn Windows API.

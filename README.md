@@ -135,6 +135,26 @@ jpackage ^
 --win-menu
 ```
 
+### Build `.pkg` file (MacOS)
+
+```bash
+#!/bin/bash
+
+jpackage \
+--type pkg \
+--name "Just Focus" \
+--vendor "Andrei Dodu" \
+--app-version "3.1.0" \
+--input "target" \
+--main-jar "just-focus.jar" \
+--icon "icon.png" \
+--main-class "com.andreidodu.Main" \
+--dest "." \
+--add-modules java.base,java.desktop \
+--java-options "-Dsun.java2d.opengl=true -Dsun.java2d.xrender=true -Djdk.gtk.version=3" \
+--verbose
+```
+
 <img src="https://andre-i.eu/api/v1/ipResource/custom.png?host=https://github.com/goto-eof/justfocus" onerror="this.style.display='none'" />
 
 # Moreover...

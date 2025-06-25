@@ -28,6 +28,10 @@ without unnecessary distractions.
 Download and install the
 following [executable file](https://github.com/goto-eof/justfocus/releases/download/3.1.0/Just.Focus-3.1.0.exe).
 
+### MacOS installation
+
+Download and install the `.pkg` [file](https://github.com/goto-eof/justfocus/releases/download/3.1.0/Just.Focus-3.1.0.pkg). Remember to allow the installation from unknown sources.
+
 ### Linux Installation (Snap)
 
 JustFocus is available as a Snap package for easy installation on most Linux distributions.

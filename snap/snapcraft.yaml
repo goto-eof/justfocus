@@ -13,7 +13,7 @@ issues: https://github.com/goto-eof
 compression: xz
 apps:
   justfocus:
-    command: usr/bin/run.sh
+    command: bin/run.sh
     extensions: [ gnome ]
     plugs:
       - desktop
@@ -34,9 +34,9 @@ parts:
     source: snap/local
     source-type: local
     organize:
-      run.sh: usr/bin/run.sh
+      run.sh: bin/run.sh
     prime:
-      - usr/bin/run.sh
+      - bin/run.sh
   application:
     plugin: maven
     source: .

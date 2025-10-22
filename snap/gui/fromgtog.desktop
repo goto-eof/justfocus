@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Just Focus
 Comment=A distraction-free focus timer
-Exec=${SNAP}/usr/bin/run.sh
+Exec=${SNAP}/bin/run.sh
 Icon=${SNAP}/meta/gui/icon.png
 Terminal=false
 Type=Application

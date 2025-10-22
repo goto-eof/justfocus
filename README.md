@@ -26,11 +26,11 @@ without unnecessary distractions.
 ### Windows installation
 
 Download and install the
-following [executable file](https://github.com/goto-eof/justfocus/releases/download/3.1.0/Just.Focus-3.1.0.exe).
+following [executable file](https://github.com/goto-eof/justfocus/releases/download/3.1.3/Just.Focus-3.1.3.exe).
 
 ### MacOS installation
 
-Download and install the `.pkg` [file](https://github.com/goto-eof/justfocus/releases/download/3.1.0/Just.Focus-3.1.0.pkg). Remember to allow the installation from unknown sources.
+Download and install the `.pkg` [file](https://github.com/goto-eof/justfocus/releases/download/3.1.3/Just.Focus-3.1.3.pkg). Remember to allow the installation from unknown sources.
 
 ### Linux Installation (Snap)
 
@@ -43,7 +43,7 @@ sudo snap install justfocus
 ### Linux Installation (dpkg)
 
 It is possible to install Just Focus by downloading the
-`.deb` [package](https://github.com/goto-eof/justfocus/releases/download/3.1.0/just-focus_3.1.0_amd64.deb) and by
+`.deb` [package](https://github.com/goto-eof/justfocus/releases/download/3.1.3/just-focus_3.1.3_amd64.deb) and by
 installing it:
 
 ```bash
@@ -107,7 +107,7 @@ jpackage \
 --type deb \
 --name "Just Focus" \
 --vendor "Andrei Dodu" \
---app-version "3.1.0" \
+--app-version "3.1.3" \
 --input "target" \
 --main-jar "just-focus.jar" \
 --icon "icon.png" \
@@ -126,7 +126,7 @@ jpackage ^
 --type exe ^
 --name "Just Focus" ^
 --vendor "Andrei Dodu" ^
---app-version "3.1.0" ^
+--app-version "3.1.3" ^
 --input "target" ^
 --main-jar "just-focus.jar" ^
 --icon "icon.ico" ^
@@ -148,7 +148,7 @@ jpackage \
 --type pkg \
 --name "Just Focus" \
 --vendor "Andrei Dodu" \
---app-version "3.1.0" \
+--app-version "3.1.3" \
 --input "target" \
 --main-jar "just-focus.jar" \
 --icon "icon.png" \

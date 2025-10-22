@@ -15,7 +15,9 @@ public class SettingsService {
 
     public void saveThemeId(int themeIndex) {
         try {
-            Files.writeString(getSettingsFilename(), "" + themeIndex, StandardCharsets.UTF_8);
+            String content = "" + themeIndex;
+            byte[] bytes = content.getBytes(StandardCharsets.UTF_8);
+            Files.write(getSettingsFilename(), bytes);
         } catch (IOException e) {
             System.err.println("cannot save settings.conf: " + e.getMessage());
             // throw new RuntimeException(e);
@@ -24,7 +26,8 @@ public class SettingsService {
 
     public int loadThemeId() {
         try {
-            String content = Files.readString(getSettingsFilename(), StandardCharsets.UTF_8);
+            byte[] bytes = Files.readAllBytes(getSettingsFilename());
+            String content = new String(bytes, StandardCharsets.UTF_8);
             return Integer.parseInt(content);
         } catch (IOException | NumberFormatException e) {
             System.err.println("Could not load settings.conf: " + e.getMessage());

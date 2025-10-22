@@ -1,0 +1,96 @@
+name: Create Linux AMD64 DEB file
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build_jar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure JDK (Linux)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Build JAR with Maven
+        run: mvn clean package
+
+      - name: Upload Artifact (JAR and resources)
+        uses: actions/upload-artifact@v4
+        with:
+          name: application-files
+          path: |
+            target/justfocus.jar
+            resources/
+
+  create_deb:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: build_jar
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Define release version
+        id: set_version
+        run: |
+          echo "RELEASE_TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          echo "Release Tag set on: ${GITHUB_REF_NAME}"
+
+      - name: Download Artifact (JAR and resources)
+        uses: actions/download-artifact@v4
+        with:
+          name: application-files
+          path: downloaded-files
+
+      - name: Configure JDK for Linux
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Install required dependencies for jpackage
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fakeroot dpkg-dev
+
+      - name: Create DEB package with jpackage
+        run: |
+          INPUT_PATH="downloaded-files/target"
+          OUTPUT_PATH="executable"
+          MAIN_JAR="justfocus.jar"
+          ICON_PATH="downloaded-files/resources/icon-linux.png"
+
+          mkdir -p "$OUTPUT_PATH"
+
+          jpackage \
+            --input "$INPUT_PATH" \
+            --dest "$OUTPUT_PATH" \
+            --name "justfocus" \
+            --vendor "Andrei Dodu" \
+            --app-version "$RELEASE_TAG" \
+            --main-jar "$MAIN_JAR" \
+            --main-class org.andreidodu.justfocus.Main \
+            --icon "$ICON_PATH" \
+            --type deb \
+            --linux-shortcut \
+            --java-options "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true" \
+            --add-modules java.base,java.desktop \
+            --verbose
+
+      - name: Zip DEB file
+        run: |
+          DEB_FILE="executable/justfocus_${RELEASE_TAG}_amd64.deb"
+          ZIP_NAME="${{ github.event.repository.name }}-Linux-${{ github.ref_name }}-amd64-Installer.zip"
+          zip -j "$ZIP_NAME" "$DEB_FILE"
+
+      - name: Release on GitHub
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ${{ github.event.repository.name }}-Linux-${{ github.ref_name }}-amd64-Installer.zip

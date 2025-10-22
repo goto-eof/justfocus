@@ -142,7 +142,7 @@ public class CircleController implements CircleObserver {
             try {
                 executorService.shutdownNow();
             } catch (Exception e) {
-                System.err.println("Unable to shutdown executor service: " + e.getMessage());
+                System.err.println("Unable to shutdown run.sh service: " + e.getMessage());
             }
         }
     }
